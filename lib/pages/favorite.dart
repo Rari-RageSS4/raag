@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:raag/components/empty_dialog.dart';
 import 'package:raag/components/favorite_list.dart';
 import 'package:gradient_icon/gradient_icon.dart';
 import 'package:raag/functions/favorite_func.dart';
@@ -18,6 +19,7 @@ class Favorite extends StatelessWidget {
               children: [
                 Container(
                   decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(18), bottomRight: Radius.circular(18)),
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
@@ -53,6 +55,7 @@ class Favorite extends StatelessWidget {
                 const SizedBox(height: 15,),
                 const Positioned(
                   top: 35,
+                  left: 125,
                   child: Text('Favourite Songs',
                     style: TextFontStyle.boldWhiteTitle
                   ),
@@ -61,48 +64,19 @@ class Favorite extends StatelessWidget {
             ),
             
             
-            const SizedBox(height: 25,),
-            
-            // shuffle
-            Container(
-              height: 40,
-              width: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                gradient: const LinearGradient(colors: [Color.fromARGB(255, 0, 125, 188), Color.fromARGB(255, 0, 67, 100)])
-              ),
-              child: const Center(
-                child: Text('Shuffle Play',
-                  style: TextFontStyle.boldWhiteTitle
-                ),
-              ),
-            ),
-            
-            const SizedBox(height: 20,),
-            
-            // edit
-            Container(
-              height: 25,
-              width: 75,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                gradient: const LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Color.fromARGB(255, 220, 221, 222), Color.fromARGB(255, 128, 128, 128)])
-              ),
-              child: const Center(
-                child: Text('Edit',
-                  style: TextFontStyle.lightBlueTitle
-                ),
-              ),
-            ),
+            const SizedBox(height: 10),
             
             // list 
             
             ValueListenableBuilder(
               valueListenable: favoriteNotifier,
-              builder: (context, List<Music> favSongs, child){
+              builder: (context, List<Music> favSongs, child){ 
+                if(favSongs.isEmpty){
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 130),
+                    child: const EmptyDialog(name: 'Favourite'),
+                  );
+                }
                 return ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,

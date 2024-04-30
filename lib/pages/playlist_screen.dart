@@ -25,7 +25,7 @@ class _PlaylistEachFolderState extends State<PlaylistEachFolder> {
         title: Text(widget.playlistObj.name),
         centerTitle: true
       ),
-      body: ListView.builder(
+      body: widget.playlistObj.songs.isEmpty? Center(child: const Text("No songs in this Playlist!")) : ListView.builder(
         itemCount: widget.playlistObj.songs.length,
         itemBuilder: (context, index) {
           return ListTile(

@@ -16,7 +16,8 @@ class PlaylistEditName {
     }
   }
 
-  Future<dynamic> folderNameAlertDialog(BuildContext context, int index) {
+  Future<dynamic> folderNameAlertDialog(BuildContext context, int index, String playlistFolderName) {
+    folderNameController.text = playlistFolderName;
     return showDialog(
       context: context,
       builder: (context) {
@@ -40,6 +41,7 @@ class PlaylistEditName {
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
+                Navigator.pop(context);
               },
               child: const Text(
                 'Cancel',
@@ -50,6 +52,7 @@ class PlaylistEditName {
               onPressed: () {
                 // save folder
                 saveEditFolder(index);
+                Navigator.pop(context);
                 Navigator.pop(context);
                 folderNameController.clear();
               },

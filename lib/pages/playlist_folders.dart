@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:raag/components/empty_dialog.dart';
 import 'package:raag/components/playlist_folder_popup.dart';
 import 'package:raag/components/playlist_name.dart';
 import 'package:raag/functions/playlist_func.dart';
@@ -47,13 +48,19 @@ class _PlaylistState extends State<PlaylistScreen> {
                 Color.fromARGB(255, 53, 120, 153)
               ])),
           child: Padding(
-            padding: const EdgeInsets.only(top: 30, left: 25),
+            padding: const EdgeInsets.all(12),
             child: Column(
               children: [
                 // folders
                 ValueListenableBuilder(
                     valueListenable: playlistNotifier,
                     builder: (context, playlist, child) {
+                      if(playlist.isEmpty){
+                        return Padding(
+                    padding: const EdgeInsets.only(top: 130),
+                    child: const EmptyDialog(name: 'Playlist'),
+                  );
+                      }
                       return GridView.builder(
                         shrinkWrap: true,
                         itemCount: playlist.length,
@@ -100,7 +107,7 @@ class _PlaylistState extends State<PlaylistScreen> {
                                             ),
                                       ),
                                       PlaylistFolderPopUp(
-                                        index: index,
+                                        index: index, folderName: playlist[index].name,
                                       ),
                                     ],
                                   ),

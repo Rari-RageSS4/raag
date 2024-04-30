@@ -4,8 +4,9 @@ import 'package:raag/components/playlist_edit_name.dart';
 import 'package:raag/functions/playlist_func.dart';
 
 class PlaylistFolderPopUp extends StatelessWidget {
+  final String folderName;
   final int index;
-  const PlaylistFolderPopUp({super.key, required this.index});
+  const PlaylistFolderPopUp({super.key, required this.index, required this.folderName});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class PlaylistFolderPopUp extends StatelessWidget {
     return GestureDetector(
         onTap: () {
           PlaylistEditName editName = PlaylistEditName();
-          editName.folderNameAlertDialog(context, index);
+          editName.folderNameAlertDialog(context, index, folderName);
         },
         child: Container(
           height: 50,

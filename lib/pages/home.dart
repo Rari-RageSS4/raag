@@ -28,18 +28,19 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color.fromARGB(255, 0, 83, 125),
-                Color.fromARGB(255, 1, 130, 195),
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
+      body: Container(
+        height: MediaQuery.sizeOf(context).height,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 0, 83, 125),
+              Color.fromARGB(255, 1, 130, 195),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
+        ),
+        child: SingleChildScrollView(
           child: Column(
             children: [
               const Text('Happy Music', style: TextFontStyle.boldWhiteTitle),
@@ -58,6 +59,8 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 child: QueryArtworkWidget(
+                  artworkHeight: 250,
+                  artworkWidth: 300,
                   nullArtworkWidget: Container(
                     height: 250,
                     width: 300,
@@ -72,7 +75,7 @@ class _HomeState extends State<Home> {
                   type: ArtworkType.AUDIO,
                 ),
               ),
-
+          
               const SizedBox(
                 height: 30,
               ),
@@ -110,24 +113,33 @@ class _HomeState extends State<Home> {
               const SizedBox(
                 height: 20,
               ),
-
+          
               const Divider(),
               const SizedBox(
                 height: 20,
               ),
-
+          
               // recently played
-
+          
               const Text('Recently Played',
-                  style: TextFontStyle.boldWhiteTitle),
+                  style: TextFontStyle.italicWhiteSubTitle),
               const SizedBox(
                 height: 30,
               ),
-
+          
               ValueListenableBuilder(
                 valueListenable: recentlyNotifier,
                 builder: (BuildContext context, List<Music> recentlySongs,
                     Widget? child) {
+                      if(recentlySongs.isEmpty){
+                        return Padding(
+                    padding: const EdgeInsets.only(top: 80, bottom: 150),
+                    child: Center(child: const Text("No Recently played songs!",
+                      style: TextFontStyle.whiteSubTitle,
+                    ),
+                    ),
+                  );
+                      }
                   return ListView.builder(
                     reverse: true,
                     physics: const NeverScrollableScrollPhysics(),
