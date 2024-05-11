@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:raag/components/empty_dialog.dart';
 import 'package:raag/functions/playlist_func.dart';
 import 'package:raag/model/music.dart';
 
@@ -16,6 +17,12 @@ Future playlistBottomSheet(BuildContext context, Music song){
         child: ValueListenableBuilder(
           valueListenable: playlistNotifier,
           builder: (context, playlist, child) {
+            if(playlist.isEmpty){
+              return Padding(
+                padding: const EdgeInsets.only(top: 130),
+                child: const EmptyDialog(name: 'Favourite'),
+              );
+            }
             return ListView.builder(
               itemCount: playlist.length,
               itemBuilder: (context, index){

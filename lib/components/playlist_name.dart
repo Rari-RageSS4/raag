@@ -29,6 +29,12 @@ class PlaylistName {
           content: Form(
             key: _key,
             child: TextFormField(
+              validator: (value) {
+                if(value!.isEmpty){
+                  return 'Please Enter your Playlist Name';
+                }
+                return null;
+              },
               controller: folderNameController,
               decoration: const InputDecoration(labelText: 'Folder Name'),
               onSaved: (value) {

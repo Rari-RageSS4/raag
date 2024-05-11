@@ -29,7 +29,7 @@ class _SongsState extends State<Songs> {
   @override
   void initState() {
     super.initState();
-    //  checkAndRequestPermissions();
+    checkAndRequestPermissions();
     box = Hive.box<Music>('musicbox');
   }
 

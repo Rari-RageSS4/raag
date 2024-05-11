@@ -18,6 +18,7 @@ class _PlaylistEachFolderState extends State<PlaylistEachFolder> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 0, 83, 125),
         leading: IconButton(
           icon: const Icon(Icons.arrow_circle_left),
           onPressed: () => Navigator.pop(context),
